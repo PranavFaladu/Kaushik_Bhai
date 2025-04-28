@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Navbar with Animated Hover</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .bg-custom-blue {
+      background-color: #003380; /* Navbar background */
+    }
+    /* Animated underline effect */
+    .hover-underline {
+      position: relative;
+      display: inline-block;
+    }
+    .hover-underline::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      left: 0;
+      bottom: -2px;
+      background-color: #FFD700; /* Golden underline */
+      transition: width 0.4s ease;
+    }
+    .hover-underline:hover::after {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="flex items-center justify-between p-4 md:p-6 bg-custom-blue text-white shadow-md">
+  <!-- Left: Logo -->
+  <div class="flex items-center space-x-3">
+    <img src="logo/Screenshot from 2025-04-28 11-21-37.png" alt="Shlok Enterprise Logo" class="h-14 w-auto">
+  </div>
+
+  <!-- Right: Menu Links (Desktop) -->
+  <div class="hidden md:flex space-x-10 text-xl font-bold">
+    <a href="#" class="hover-underline">Home</a>
+    <a href="#" class="hover-underline">About</a>
+    <a href="#" class="hover-underline">Product</a>
+    <a href="contact.html" class="hover-underline">Contact</a>
+  </div>
+
+  <!-- Mobile Menu Button -->
+  <div class="md:hidden">
+    <button id="menu-btn" class="focus:outline-none">
+      <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M4 6h16M4 12h16m-7 6h7"></path>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="hidden md:hidden bg-custom-blue text-white font-bold">
+  <a href="#" class="block px-6 py-5 text-xl hover:bg-[#0050b3] transition duration-300">Home</a>
+  <a href="#" class="block px-6 py-5 text-xl hover:bg-[#0050b3] transition duration-300">About</a>
+  <a href="#" class="block px-6 py-5 text-xl hover:bg-[#0050b3] transition duration-300">Product</a>
+  <a href="contact.html" class="block px-6 py-5 text-xl hover:bg-[#0050b3] transition duration-300">Contact</a>
+</div>
+
+<script>
+  // Toggle mobile menu
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>
+
+</body>
+</html>

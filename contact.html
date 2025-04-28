@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .bg-custom-blue {
+        background-color: #003380; /* Navbar background */
+      }
+      /* Animated underline effect */
+      .hover-underline {
+        position: relative;
+        display: inline-block;
+      }
+      .hover-underline::after {
+        content: "";
+        position: absolute;
+        width: 0%;
+        height: 2px;
+        left: 0;
+        bottom: -2px;
+        background-color: #FFD700; /* Golden underline */
+        transition: width 0.4s ease;
+      }
+      .hover-underline:hover::after {
+        width: 100%;
+      }
+      
+      /* Body styles */
+      body {
+        font-family: "Arial", sans-serif;
+        background: #f9fafb;
+        color: #333;
+        margin: 0;
+        padding: 0;
+      }
+      
+      /* Modern card design */
+      .card {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+      }
+      
+      /* Contact form styling */
+      .contact-form input, 
+      .contact-form textarea, 
+      .contact-form select {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+      }
+      
+      .contact-form input:focus, 
+      .contact-form textarea:focus, 
+      .contact-form select:focus {
+        border-color: #2563eb;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+      
+      .submit-btn {
+        width: 100%;
+        background-color: #2563eb;
+        color: white;
+        font-weight: 600;
+        padding: 14px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      
+      .submit-btn:hover {
+        background-color: #1d4ed8;
+      }
+      
+      /* Social icons */
+      .social-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: #3b82f6;
+        color: white;
+        border-radius: 50%;
+        transition: transform 0.3s, background-color 0.3s;
+        margin-right: 10px;
+      }
+      
+      .social-icon:hover {
+        transform: translateY(-3px);
+        background-color: #2563eb;
+      }
+      
+      /* Contact info icons */
+      .contact-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: #f0f7ff;
+        color: #3b82f6;
+        border-radius: 50%;
+        margin-right: 15px;
+      }
+      
+      /* Footer styles */
+      .footer {
+        background-color: #0f172a;
+        color: #e2e8f0;
+        padding: 40px 20px;
+      }
+
+      .footer-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        justify-content: space-between;
+        
+      }
+
+      .footer-section {
+        flex: 1 1 220px;
+        min-width: 220px;
+      }
+
+      .footer h3, .footer h4 {
+        color: #ffffff;
+        margin-bottom: 15px;
+      }
+
+      .footer p, .footer small {
+        color: #cbd5e1;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .footer ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .footer ul li {
+        margin: 8px 0;
+      }
+
+      .footer ul li a {
+        color: #cbd5e1;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .footer ul li a:hover {
+        color: #ffffff;
+      }
+
+      .social-icons a {
+        margin-right: 12px;
+        color: #e2e8f0;
+        font-size: 18px;
+        text-decoration: none;
+      }
+
+      .footer-form input[type="email"] {
+        padding: 10px;
+        width: 100%;
+        max-width: 280px;
+        border: none;
+        border-radius: 4px;
+        background-color: #1e293b;
+        color: #e2e8f0;
+        margin-bottom: 10px;
+      }
+
+      .footer-form button {
+        padding: 10px 20px;
+        background-color: #3b82f6;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+
+      .footer-form button:hover {
+        background-color: #2563eb;
+      }
+
+      .footer-bottom {
+        border-top: 1px solid #1e293b;
+        margin-top: 40px;
+        padding-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        font-size: 14px;
+        color: #94a3b8;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .footer-links a {
+        color: #94a3b8;
+        text-decoration: none;
+        margin-left: 20px;
+        transition: color 0.2s;
+      }
+
+      .footer-links a:hover {
+        color: #e2e8f0;
+      }
+      
+      /* Map styling */
+      .map-wrapper {
+        max-width: 1200px;
+        margin: 40px auto;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      }
+      
+      .map-wrapper iframe {
+        width: 100%;
+        height: 400px;
+        border: 0;
+        display: block;
+      }
+      
+      .page-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        text-align: center;
+        color: #1f2937;
+        margin-bottom: 0.5rem;
+      }
+      
+      .page-subtitle {
+        text-align: center;
+        font-size: 1.125rem;
+        color: #6b7280;
+        margin-bottom: 3rem;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- New Navbar -->
+    <nav class="flex items-center justify-between p-4 md:p-6 bg-custom-blue text-white shadow-md">
+      <!-- Left: Logo -->
+      <div class="flex items-center space-x-3">
+        <img src="logo/Screenshot from 2025-04-28 11-21-37.png" alt="Shlok Enterprise Logo" class="h-14 w-auto">
+      </div>
+
+      <!-- Right: Menu Links (Desktop) -->
+      <div class="hidden md:flex space-x-10 text-xl font-bold">
+        <a href="index.html" class="hover-underline">Home</a>
+        <a href="About.html" class="hover-underline">About</a>
+        <a href="#" class="hover-underline">Product</a>
+        <a href="contact.html" class="hover-underline">Contact</a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden">
+        <button id="menu-btn" class="focus:outline-none">
+          <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-custom-blue text-white font-bold">
+      <a href="index.html" class="block px-6 py-5 text-xl hover:bg-[#0050b3] transition duration-300">Home</a>
+      <a href="About.html" class="block px-6 py-5 text-xl hover:bg-[#0050b3] transition duration-300">About</a>
+      <a href="#" class="block px-6 py-5 text-xl hover:bg-[#0050b3] transition duration-300">Product</a>
+      <a href="contact.html" class="block px-6 py-5 text-xl hover:bg-[#0050b3] transition duration-300">Contact</a>
+    </div>
+
+    <!-- Header -->
+    <div class="max-w-7xl mx-auto px-4 py-0">
+      <h1 class="page-title">Contact</h1>
+      <p class="page-subtitle">
+        Have questions about our products or need assistance with your order? Our team is here to help!
+      </p>
+      
+      <!-- Contact Section -->
+      <div class="flex flex-wrap gap-8 mb-16">
+        <!-- Contact Information Card -->
+        <div class="card flex-1 min-w-[300px]">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-8">Get In Touch</h2>
+            
+            <!-- Location -->
+            <div class="flex mb-6">
+              <div class="contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold">Our Location</h3>
+                <p class="text-gray-600">
+                  Plot No. 307-311/46,
+
+                  Old Rajat Pharma,
+                  
+                  Nr. Ramdevpir Chowkdi,
+                  
+                  GIDC Estate Ankleshwar-393002
+                  
+                  Dist.- Bharuch ( Gujarat )
+                </p>
+              </div>
+            </div>
+            
+            <!-- Phone -->
+            <div class="flex mb-6">
+              <div class="contact-icon">
+                <i class="fas fa-phone"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold">Phone Number</h3>
+                <p class="text-gray-600">
+                  Kaushik Ukani :- +91 94273 27909<br>
+                  Office :- +91 72839 73984<br>
+                  <span class="text-sm">Mon-Sat, 9am-6pm EST</span>
+                </p>
+              </div>
+            </div>
+            
+            <!-- Email -->
+            <div class="flex mb-8">
+              <div class="contact-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold">Email Address</h3>
+                <p class="text-gray-600">
+                  shlokenterprise.ank@gmail.com<br>
+                  bharattraders.ank@gmail.com<br>
+                  <span class="text-sm">Support available 24/7</span>
+                </p>
+              </div>
+            </div>
+            
+            <!-- Social Links -->
+            <div class="mt-8">
+              <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+              <div class="flex">
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Contact Form Card -->
+        <div class="card flex-[1.5] min-w-[300px]">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-8">Send Us a Message</h2>
+            <form class="contact-form">
+              <!-- Name Fields -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <input type="text" placeholder="First Name" required>
+                </div>
+                <div>
+                  <input type="text" placeholder="Last Name" required>
+                </div>
+              </div>
+              
+              <!-- Contact Details -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <input type="email" placeholder="Email Address" required>
+                </div>
+                <div>
+                  <input type="tel" placeholder="Phone Number" required>
+                </div>
+              </div>
+              
+              <!-- Subject -->
+              <div class="mb-4">
+                <select required>
+                  <option value="" selected disabled>Select a subject</option>
+                  <option value="support">Support</option>
+                  <option value="sales">Sales</option>
+                  <option value="feedback">Feedback</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              
+              <!-- Message -->
+              <div class="mb-6">
+                <textarea rows="5" placeholder="Please describe your inquiry in detail..." required></textarea>
+              </div>
+              
+              <!-- Newsletter Checkbox -->
+              <div class="flex items-center mb-6">
+                <input type="checkbox" id="subscribe" class="w-4 h-4 mr-2">
+                <label for="subscribe" class="text-gray-600 text-sm">Subscribe to our newsletter for promotions and updates</label>
+              </div>
+              
+              <!-- Submit Button -->
+              <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map Section -->
+    <div class="map-wrapper">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4322.323744586329!2d73.0178078!3d21.6253749!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be023ebeee4dd1b%3A0x78b65a5a3b8597d!2sShlok%20Enterprise!5e1!3m2!1sen!2sin!4v1745827776206!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-section">
+          <h3>Text Tiles</h3>
+          <p>Premium quality tiles for all your needs. Transform your space with our exclusive collection.</p>
+          <div class="social-icons mt-4">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+    
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+    
+        <div class="footer-section">
+          <h4>Categories</h4>
+          <ul>
+            <li><a href="#">dfdgd dfgfg</a></li>
+            <li><a href="#">Wall Tiles</a></li>
+            <li><a href="#">Outdoor Tiles</a></li>
+            <li><a href="#">Decorative Tiles</a></li>
+          </ul>
+        </div>
+    
+        <div class="footer-section">
+          <h4>Stay Updated</h4>
+          <p>Subscribe to our newsletter for the latest updates, promotions, and design tips.</p>
+          <form class="footer-form mt-4">
+            <input type="email" placeholder="Email address" required />
+            <button type="submit">Subscribe</button>
+          </form>
+          <small>We respect your privacy. Unsubscribe at any time.</small>
+        </div>
+      </div>
+    
+      <div class="footer-bottom">
+        <p>© 2023 Text Tiles. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Shipping Policy</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Toggle mobile menu
+      const menuBtn = document.getElementById('menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    </script>
+  </body>
+</html>
