@@ -1,79 +1,503 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Navbar with Animated Hover</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .bg-custom-blue {
-      background-color: #003380; /* Navbar background */
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Navbar with Animated Hover</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .bg-custom-blue {
+        /* background-color: #003380; Navbar background */
+        background-color: whitesmoke;
+      }
+      /* Animated underline effect */
+      .hover-underline {
+        position: relative;
+        display: inline-block;
+      }
+      .hover-underline{
+        color: black;
     }
-    /* Animated underline effect */
-    .hover-underline {
-      position: relative;
-      display: inline-block;
-    }
-    .hover-underline::after {
-      content: "";
-      position: absolute;
-      width: 0%;
-      height: 2px;
-      left: 0;
-      bottom: -2px;
-      background-color: #FFD700; /* Golden underline */
-      transition: width 0.4s ease;
-    }
-    .hover-underline:hover::after {
-      width: 100%;
-    }
-  </style>
-</head>
-<body>
+      .hover-underline::after {
+        content: "";
+        position: absolute;
+        width: 0%;
+        height: 2px;
+        left: 0;
+        bottom: -2px;
+        background-color: #ffd700; /* Golden underline */
+        transition: width 0.4s ease;
+      }
+      .hover-underline:hover::after {
+        width: 100%;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+      }
 
-<!-- Navbar -->
-<nav class="flex items-center justify-between p-4 md:p-6 bg-custom-blue text-white shadow-md">
-  <!-- Left: Logo -->
-  <div class="flex items-center space-x-3">
-    <img src="logo/Screenshot from 2025-04-28 11-21-37.png" alt="Shlok Enterprise Logo" class="h-14 w-auto">
-  </div>
+      .slider-container {
+        position: relative;
+        max-width: 100%;
+        overflow: hidden;
+        /* Reduced height */
+        height: 700px;
+        background-color: #444444;
+      }
 
-  <!-- Right: Menu Links (Desktop) -->
-  <div class="hidden md:flex space-x-10 text-xl font-bold">
-    <a href="#" class="hover-underline">Home</a>
-    <a href="#" class="hover-underline">About</a>
-    <a href="#" class="hover-underline">Product</a>
-    <a href="contact.html" class="hover-underline">Contact</a>
-  </div>
+      .slides {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        height: 100%;
+        width: 100%;
+      }
 
-  <!-- Mobile Menu Button -->
-  <div class="md:hidden">
-    <button id="menu-btn" class="focus:outline-none">
-      <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M4 6h16M4 12h16m-7 6h7"></path>
-      </svg>
-    </button>
-  </div>
-</nav>
+      .slide {
+        min-width: 100%;
+        flex: 0 0 100%;
+        position: relative;
+        background-color: #444444;
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+      }
 
-<!-- Mobile Menu -->
-<div id="mobile-menu" class="hidden md:hidden bg-custom-blue text-white font-bold">
-  <a href="#" class="block px-6 py-5 text-xl hover:bg-[#0050b3] transition duration-300">Home</a>
-  <a href="#" class="block px-6 py-5 text-xl hover:bg-[#0050b3] transition duration-300">About</a>
-  <a href="#" class="block px-6 py-5 text-xl hover:bg-[#0050b3] transition duration-300">Product</a>
-  <a href="contact.html" class="block px-6 py-5 text-xl hover:bg-[#0050b3] transition duration-300">Contact</a>
-</div>
+      .slide-content {
+        width: 40%;
+        color: white;
+        padding-left: 10%;
+        z-index: 2;
+      }
 
-<script>
-  // Toggle mobile menu
-  const menuBtn = document.getElementById('menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
+      .slide-content .feature-list {
+        font-size: 1.3rem;
+        line-height: 1.6;
+        margin-bottom: 1.2rem;
+        font-weight: 400;
+      }
 
-  menuBtn.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
-  });
-</script>
+      .slide-content .tagline {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-top: 0.8rem;
+      }
 
-</body>
+      .slide-image {
+        width: 60%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .slide-image img {
+        max-width: 80%;
+        max-height: 80%;
+        object-fit: contain;
+      }
+
+      .prev-btn,
+      .next-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .prev-btn {
+        left: 10px;
+      }
+
+      .next-btn {
+        right: 10px;
+      }
+
+      .slide-indicators {
+        position: absolute;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+        z-index: 10;
+      }
+
+      .indicator {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+      }
+
+      .indicator.active {
+        background-color: white;
+      }
+
+      /* Red bottom border */
+      /* .red-border {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 6px;
+        background-color: #e52325;
+      } */
+
+      /* Responsive adjustments */
+      @media (max-width: 992px) {
+        .slide-content .feature-list {
+          font-size: 1.1rem;
+          line-height: 1.5;
+        }
+
+        .slide-content .tagline {
+          font-size: 1.6rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .slider-container {
+          height: 600px;
+        }
+
+        .slide {
+          flex-direction: column;
+        }
+
+        .slide-content,
+        .slide-image {
+          width: 100%;
+          padding: 15px;
+          text-align: center;
+        }
+
+        .slide-content {
+          padding-bottom: 0;
+        }
+
+        .slide-image {
+          height: 55%;
+        }
+
+        .slide-content .feature-list {
+          font-size: 1.5rem;
+          line-height: 1.3;
+          margin-bottom: 0.6rem;
+        }
+
+        .slide-content .tagline {
+          font-size: 2.5rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .slider-container {
+          height: 500px;
+        }
+
+        .slide-content .feature-list {
+          font-size: 1rem;
+          line-height: 1.2;
+        }
+
+        .slide-content .tagline {
+          font-size: 2rem;
+        }
+
+        .prev-btn,
+        .next-btn {
+          width: 25px;
+          height: 25px;
+          font-size: 0.9rem;
+        }
+        
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav
+      class="flex items-center justify-between p-4 md:p-6 bg-custom-blue text-white shadow-md"
+    >
+      <!-- Left: Logo -->
+      <div class="flex items-center space-x-3">
+        <img
+          src="logo/logo.jpeg"
+          alt="Shlok Enterprise Logo"
+          class="h-14 w-auto"
+        />
+      </div>
+
+      <!-- Right: Menu Links (Desktop) -->
+      <div class="hidden md:flex space-x-10 text-xl font-bold">
+        <a href="#" class="hover-underline">Home</a>
+        <a href="#" class="hover-underline">About</a>
+        <a href="#" class="hover-underline">Product</a>
+        <a href="contact.html" class="hover-underline">Contact</a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden">
+        <button id="menu-btn" class="focus:outline-none">
+          <svg
+            class="w-12 h-12"
+            fill="none"
+            stroke="black"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16m-7 6h7"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div
+      id="mobile-menu"
+      class="hidden md:hidden bg-custom-black text-black font-bold"
+    >
+      <a
+        href="#"
+        class="block px-6 py-5 text-xl hover:bg-[#555555] transition duration-300"
+        >Home</a
+      >
+      <a
+        href="#"
+        class="block px-6 py-5 text-xl hover:bg-[#0050b3] transition duration-300"
+        >About</a
+      >
+      <a
+        href="#"
+        class="block px-6 py-5 text-xl hover:bg-[#0050b3] transition duration-300"
+        >Product</a
+      >
+      <a
+        href="contact.html"
+        class="block px-6 py-5 text-xl hover:bg-[#0050b3] transition duration-300"
+        >Contact</a
+      >
+    </div>
+
+    <div class="slider-container">
+      <div class="slides">
+        <div class="slide">
+          <div class="slide-content">
+            <div class="feature-list">
+              Right Design<br />
+              Correct Mechanism<br />
+              Perfect Workmanship<br />
+              Accurate Testing
+            </div>
+            <div class="tagline">Makes OSKO Valves best in it's class.</div>
+          </div>
+          <div class="slide-image">
+            <img src="logo/logo1.png" alt="OSKO Industrial Valve" />
+          </div>
+        </div>
+
+        <div class="slide">
+          <div class="slide-content">
+            <div class="feature-list">
+              Durable Materials<br />
+              Precision Engineering<br />
+              Advanced Technology<br />
+              Superior Performance
+            </div>
+            <div class="tagline">Industry-leading quality since 1985.</div>
+          </div>
+          <div class="slide-image">
+            <img src="logo/Logo 2.png" alt="OSKO Valve Product" />
+          </div>
+        </div>
+
+        <div class="slide">
+          <div class="slide-content">
+            <div class="feature-list">
+              Global Standards<br />
+              Rigorous Testing<br />
+              Custom Solutions<br />
+              Technical Support
+            </div>
+            <div class="tagline">Trusted by industries worldwide.</div>
+          </div>
+          <div class="slide-image">
+            <img src="logo/Logo 3.png" alt="OSKO Valve Technology" />
+          </div>
+        </div>
+
+        <div class="slide">
+          <div class="slide-content">
+            <div class="feature-list">
+              Innovative Designs<br />
+              Smart Controls<br />
+              Energy Efficient<br />
+              Low Maintenance
+            </div>
+            <div class="tagline">Engineering excellence in every valve.</div>
+          </div>
+          <div class="slide-image">
+            <img src="logo/Logo 4.png" alt="OSKO Valve Engineering" />
+          </div>
+        </div>
+
+        <div class="slide">
+          <div class="slide-content">
+            <div class="feature-list">
+              24/7 Support<br />
+              Global Delivery<br />
+              Custom Solutions<br />
+              After-sales Service
+            </div>
+            <div class="tagline">Your partner in fluid control systems.</div>
+          </div>
+          <div class="slide-image">
+            <img src="logo/Logo 5.png" alt="OSKO Customer Support" />
+          </div>
+        </div>
+      </div>
+
+      <button class="prev-btn">&#10094;</button>
+      <button class="next-btn">&#10095;</button>
+
+      <div class="slide-indicators">
+        <div class="indicator active"></div>
+        <div class="indicator"></div>
+        <div class="indicator"></div>
+        <div class="indicator"></div>
+        <div class="indicator"></div>
+      </div>
+
+      <div class="red-border"></div>
+    </div>
+
+    <script>
+      // Toggle mobile menu
+      const menuBtn = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+
+      const slides = document.querySelector(".slides");
+      const slideItems = document.querySelectorAll(".slide");
+      const prevBtn = document.querySelector(".prev-btn");
+      const nextBtn = document.querySelector(".next-btn");
+      const indicators = document.querySelectorAll(".indicator");
+
+      let currentSlide = 0;
+      const totalSlides = slideItems.length;
+
+      // Set initial position
+      function updateSliderPosition() {
+        slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+        // Update indicators
+        indicators.forEach((indicator, index) => {
+          indicator.classList.toggle("active", index === currentSlide);
+        });
+      }
+
+      // Next slide
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateSliderPosition();
+      }
+
+      // Previous slide
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateSliderPosition();
+      }
+
+      // Auto slide
+      let slideInterval = setInterval(nextSlide, 5000);
+
+      // Reset timer on manual navigation
+      function resetInterval() {
+        clearInterval(slideInterval);
+        slideInterval = setInterval(nextSlide, 5000);
+      }
+
+      // Event listeners
+      nextBtn.addEventListener("click", () => {
+        nextSlide();
+        resetInterval();
+      });
+
+      prevBtn.addEventListener("click", () => {
+        prevSlide();
+        resetInterval();
+      });
+
+      // Indicator clicks
+      indicators.forEach((indicator, index) => {
+        indicator.addEventListener("click", () => {
+          currentSlide = index;
+          updateSliderPosition();
+          resetInterval();
+        });
+      });
+
+      // Touch events for mobile
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      slides.addEventListener("touchstart", (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      });
+
+      slides.addEventListener("touchend", (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      });
+
+      function handleSwipe() {
+        const swipeThreshold = 50;
+        if (touchEndX < touchStartX - swipeThreshold) {
+          // Swipe left
+          nextSlide();
+          resetInterval();
+        } else if (touchEndX > touchStartX + swipeThreshold) {
+          // Swipe right
+          prevSlide();
+          resetInterval();
+        }
+      }
+
+      // Pause autoplay when tab is not visible
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          clearInterval(slideInterval);
+        } else {
+          slideInterval = setInterval(nextSlide, 5000);
+        }
+      });
+
+      // Initialize
+      updateSliderPosition();
+    </script>
+  </body>
 </html>
