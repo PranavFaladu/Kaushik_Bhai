@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="metalic.css">
+
+    <title>Document</title>
+    <style>
+        bg-custom-blue {
+        /* background-color: #003380; Navbar background */
+        background-color: white;
+      }
+      /* Animated underline effect */
+      .hover-underline {
+        position: relative;
+        display: inline-block;
+      }
+      .hover-underline {
+        color: black;
+      }
+      .hover-underline::after {
+        content: "";
+        position: absolute;
+        width: 0%;
+        height: 2px;
+        left: 0;
+        bottom: -2px;
+        background-color: #ffd700; /* Golden underline */
+        transition: width 0.4s ease;
+      }
+      .hover-underline:hover::after {
+        width: 100%;
+      }
+    </style>
+</head>
+<body>
+     <!-- New Navbar -->
+     <nav
+     class="flex items-center justify-between p-4 md:p-6 bg-custom-blue text-white shadow-md"
+   >
+     <!-- Left: Logo -->
+     <div class="flex items-center space-x-3">
+       <img
+         src="logo/logo.jpeg"
+         alt="Shlok Enterprise Logo"
+         class="h-14 w-auto"
+       />
+     </div>
+
+     <!-- Right: Menu Links (Desktop) -->
+     <div class="hidden md:flex space-x-10 text-2xl font-bold">
+       <a href="index.html" class="hover-underline">Home</a>
+       <a href="About.html" class="hover-underline">About</a>
+       <a href="#" class="hover-underline">Product</a>
+       <a href="contact.html" class="hover-underline">Contact</a>
+     </div>
+
+     <!-- Mobile Menu Button -->
+     <div class="md:hidden">
+       <button id="menu-btn" class="focus:outline-none">
+         <svg
+           class="w-12 h-12"
+           fill="none"
+           stroke="black"
+           viewBox="0 0 24 24"
+         >
+           <path
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             stroke-width="2"
+             d="M4 6h16M4 12h16m-7 6h7"
+           ></path>
+         </svg>
+       </button>
+     </div>
+   </nav>
+
+
+
+   <section class="products-section">
+    <h2>Our Products</h2>
+    <div class="filter-buttons">
+      <button class="active"><a href="product.html">industrial Valves</a></button>
+      <a href="Metalic_Pipes.html"><button>Non Metalic Pipes Fitting</button></a>
+      <a href="#"><button>Non Metalic Fabrication Works</button></a>
+    </div>
+
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="https://oskovalves.com/wp-content/uploads/2021/06/Actuated-Butterfly-Valves-1-1536x1536.png" alt="Actuated Butterfly Valves">
+        <p>Actuated Butterfly Valves</p>
+      </div>
+
+      <div class="product-card">
+        <img src="https://oskovalves.com/wp-content/uploads/2021/06/Actuated-Ball-Valve-1-1536x1536.png" alt="Actuated Ball Valves">
+        <p>Actuated Ball Valves</p>
+      </div>
+
+      <div class="product-card">
+        <img src="https://oskovalves.com/wp-content/uploads/2021/06/Wafer-Type-Butterfly-Valve-1.png" alt="Wafer Type Butterfly Valves">
+        <p>Wafer Type Butterfly Valves</p>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
